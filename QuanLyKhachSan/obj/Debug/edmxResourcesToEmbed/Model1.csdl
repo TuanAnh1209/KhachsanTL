@@ -1,0 +1,292 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QLKSCModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="chucvu">
+    <Key>
+      <PropertyRef Name="macv" />
+    </Key>
+    <Property Name="macv" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="tencv" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="nhanviens" Relationship="Self.FK__nhanvien__macv__286302EC" FromRole="chucvu" ToRole="nhanvien" />
+  </EntityType>
+  <EntityType Name="datphong">
+    <Key>
+      <PropertyRef Name="madp" />
+    </Key>
+    <Property Name="madp" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="manv" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="makh" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="tenlp" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ngaydat" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="ngayden" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="ngaydi" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="tiendatcoc" Type="Int32" />
+    <Property Name="soluong" Type="Int32" Nullable="false" />
+    <Property Name="trangthai" Type="Boolean" />
+    <NavigationProperty Name="khachhang" Relationship="Self.FK__datphong__makh__3C69FB99" FromRole="datphong" ToRole="khachhang" />
+    <NavigationProperty Name="nhanvien" Relationship="Self.FK__datphong__manv__3B75D760" FromRole="datphong" ToRole="nhanvien" />
+    <NavigationProperty Name="loaiphong" Relationship="Self.FK__datphong__tenlp__3D5E1FD2" FromRole="datphong" ToRole="loaiphong" />
+    <NavigationProperty Name="hoadons" Relationship="Self.FK__hoadon__madp__46E78A0C" FromRole="datphong" ToRole="hoadon" />
+    <NavigationProperty Name="phongs" Relationship="Self.ctphongdat" FromRole="datphong" ToRole="phong" />
+  </EntityType>
+  <EntityType Name="hoadon">
+    <Key>
+      <PropertyRef Name="mahd" />
+    </Key>
+    <Property Name="mahd" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="madp" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="ngaylap" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="tongtien" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="datphong" Relationship="Self.FK__hoadon__madp__46E78A0C" FromRole="hoadon" ToRole="datphong" />
+  </EntityType>
+  <EntityType Name="khachhang">
+    <Key>
+      <PropertyRef Name="makh" />
+    </Key>
+    <Property Name="makh" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="hoten" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="cmnd" Type="String" MaxLength="9" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="sdt" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="diachi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="datphongs" Relationship="Self.FK__datphong__makh__3C69FB99" FromRole="khachhang" ToRole="datphong" />
+  </EntityType>
+  <EntityType Name="loaiphong">
+    <Key>
+      <PropertyRef Name="tenlp" />
+    </Key>
+    <Property Name="tenlp" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="soluong" Type="Int32" Nullable="false" />
+    <Property Name="giaphong" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="datphongs" Relationship="Self.FK__datphong__tenlp__3D5E1FD2" FromRole="loaiphong" ToRole="datphong" />
+    <NavigationProperty Name="phongs" Relationship="Self.FK__phong__tenlp__31EC6D26" FromRole="loaiphong" ToRole="phong" />
+  </EntityType>
+  <EntityType Name="nhanvien">
+    <Key>
+      <PropertyRef Name="manv" />
+    </Key>
+    <Property Name="manv" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="macv" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="hoten" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ngaysinh" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="gioitinh" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="sdt" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="cmnd" Type="String" MaxLength="9" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="diachi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="chucvu" Relationship="Self.FK__nhanvien__macv__286302EC" FromRole="nhanvien" ToRole="chucvu" />
+    <NavigationProperty Name="datphongs" Relationship="Self.FK__datphong__manv__3B75D760" FromRole="nhanvien" ToRole="datphong" />
+    <NavigationProperty Name="quyennvs" Relationship="Self.FK__quyennv__manv__4CA06362" FromRole="nhanvien" ToRole="quyennv" />
+  </EntityType>
+  <EntityType Name="phanquyen">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="quyen" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="quyennvs" Relationship="Self.FK__quyennv__id__4D94879B" FromRole="phanquyen" ToRole="quyennv" />
+  </EntityType>
+  <EntityType Name="phong">
+    <Key>
+      <PropertyRef Name="maphong" />
+    </Key>
+    <Property Name="maphong" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="tenlp" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="tinhtrang" Type="Boolean" />
+    <NavigationProperty Name="loaiphong" Relationship="Self.FK__phong__tenlp__31EC6D26" FromRole="phong" ToRole="loaiphong" />
+    <NavigationProperty Name="datphongs" Relationship="Self.ctphongdat" FromRole="phong" ToRole="datphong" />
+  </EntityType>
+  <EntityType Name="quyennv">
+    <Key>
+      <PropertyRef Name="manv" />
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="manv" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="id" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="matkhau" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="nhanvien" Relationship="Self.FK__quyennv__manv__4CA06362" FromRole="quyennv" ToRole="nhanvien" />
+    <NavigationProperty Name="phanquyen" Relationship="Self.FK__quyennv__id__4D94879B" FromRole="quyennv" ToRole="phanquyen" />
+  </EntityType>
+  <Association Name="FK__nhanvien__macv__286302EC">
+    <End Role="chucvu" Type="Self.chucvu" Multiplicity="1" />
+    <End Role="nhanvien" Type="Self.nhanvien" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="chucvu">
+        <PropertyRef Name="macv" />
+      </Principal>
+      <Dependent Role="nhanvien">
+        <PropertyRef Name="macv" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__datphong__makh__3C69FB99">
+    <End Role="khachhang" Type="Self.khachhang" Multiplicity="1" />
+    <End Role="datphong" Type="Self.datphong" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="khachhang">
+        <PropertyRef Name="makh" />
+      </Principal>
+      <Dependent Role="datphong">
+        <PropertyRef Name="makh" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__datphong__manv__3B75D760">
+    <End Role="nhanvien" Type="Self.nhanvien" Multiplicity="1" />
+    <End Role="datphong" Type="Self.datphong" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="nhanvien">
+        <PropertyRef Name="manv" />
+      </Principal>
+      <Dependent Role="datphong">
+        <PropertyRef Name="manv" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__datphong__tenlp__3D5E1FD2">
+    <End Role="loaiphong" Type="Self.loaiphong" Multiplicity="1" />
+    <End Role="datphong" Type="Self.datphong" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="loaiphong">
+        <PropertyRef Name="tenlp" />
+      </Principal>
+      <Dependent Role="datphong">
+        <PropertyRef Name="tenlp" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__hoadon__madp__46E78A0C">
+    <End Role="datphong" Type="Self.datphong" Multiplicity="1" />
+    <End Role="hoadon" Type="Self.hoadon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="datphong">
+        <PropertyRef Name="madp" />
+      </Principal>
+      <Dependent Role="hoadon">
+        <PropertyRef Name="madp" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__phong__tenlp__31EC6D26">
+    <End Role="loaiphong" Type="Self.loaiphong" Multiplicity="0..1" />
+    <End Role="phong" Type="Self.phong" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="loaiphong">
+        <PropertyRef Name="tenlp" />
+      </Principal>
+      <Dependent Role="phong">
+        <PropertyRef Name="tenlp" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__quyennv__manv__4CA06362">
+    <End Role="nhanvien" Type="Self.nhanvien" Multiplicity="1" />
+    <End Role="quyennv" Type="Self.quyennv" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="nhanvien">
+        <PropertyRef Name="manv" />
+      </Principal>
+      <Dependent Role="quyennv">
+        <PropertyRef Name="manv" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__quyennv__id__4D94879B">
+    <End Role="phanquyen" Type="Self.phanquyen" Multiplicity="1" />
+    <End Role="quyennv" Type="Self.quyennv" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="phanquyen">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="quyennv">
+        <PropertyRef Name="id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ctphongdat">
+    <End Role="phong" Type="Self.phong" Multiplicity="*" />
+    <End Role="datphong" Type="Self.datphong" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="QLKSCEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="chucvus" EntityType="Self.chucvu" />
+    <EntitySet Name="datphongs" EntityType="Self.datphong" />
+    <EntitySet Name="hoadons" EntityType="Self.hoadon" />
+    <EntitySet Name="khachhangs" EntityType="Self.khachhang" />
+    <EntitySet Name="loaiphongs" EntityType="Self.loaiphong" />
+    <EntitySet Name="nhanviens" EntityType="Self.nhanvien" />
+    <EntitySet Name="phanquyens" EntityType="Self.phanquyen" />
+    <EntitySet Name="phongs" EntityType="Self.phong" />
+    <EntitySet Name="quyennvs" EntityType="Self.quyennv" />
+    <AssociationSet Name="FK__nhanvien__macv__286302EC" Association="Self.FK__nhanvien__macv__286302EC">
+      <End Role="chucvu" EntitySet="chucvus" />
+      <End Role="nhanvien" EntitySet="nhanviens" />
+    </AssociationSet>
+    <AssociationSet Name="FK__datphong__makh__3C69FB99" Association="Self.FK__datphong__makh__3C69FB99">
+      <End Role="khachhang" EntitySet="khachhangs" />
+      <End Role="datphong" EntitySet="datphongs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__datphong__manv__3B75D760" Association="Self.FK__datphong__manv__3B75D760">
+      <End Role="nhanvien" EntitySet="nhanviens" />
+      <End Role="datphong" EntitySet="datphongs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__datphong__tenlp__3D5E1FD2" Association="Self.FK__datphong__tenlp__3D5E1FD2">
+      <End Role="loaiphong" EntitySet="loaiphongs" />
+      <End Role="datphong" EntitySet="datphongs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__hoadon__madp__46E78A0C" Association="Self.FK__hoadon__madp__46E78A0C">
+      <End Role="datphong" EntitySet="datphongs" />
+      <End Role="hoadon" EntitySet="hoadons" />
+    </AssociationSet>
+    <AssociationSet Name="FK__phong__tenlp__31EC6D26" Association="Self.FK__phong__tenlp__31EC6D26">
+      <End Role="loaiphong" EntitySet="loaiphongs" />
+      <End Role="phong" EntitySet="phongs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__quyennv__manv__4CA06362" Association="Self.FK__quyennv__manv__4CA06362">
+      <End Role="nhanvien" EntitySet="nhanviens" />
+      <End Role="quyennv" EntitySet="quyennvs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__quyennv__id__4D94879B" Association="Self.FK__quyennv__id__4D94879B">
+      <End Role="phanquyen" EntitySet="phanquyens" />
+      <End Role="quyennv" EntitySet="quyennvs" />
+    </AssociationSet>
+    <AssociationSet Name="ctphongdat" Association="Self.ctphongdat">
+      <End Role="phong" EntitySet="phongs" />
+      <End Role="datphong" EntitySet="datphongs" />
+    </AssociationSet>
+    <FunctionImport Name="getdskh" ReturnType="Collection(QLKSCModel.getdskh_Result)" />
+    <FunctionImport Name="getdsnv" ReturnType="Collection(QLKSCModel.getdsnv_Result)" />
+    <FunctionImport Name="gethoadon" ReturnType="Collection(QLKSCModel.gethoadon_Result)">
+      <Parameter Name="madp" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="getdskh_Result">
+    <Property Type="String" Name="makh" Nullable="false" MaxLength="5" />
+    <Property Type="String" Name="hoten" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="cmnd" Nullable="false" MaxLength="9" />
+    <Property Type="String" Name="sdt" Nullable="false" MaxLength="12" />
+    <Property Type="String" Name="email" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="diachi" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="getdsnv_Result">
+    <Property Type="String" Name="manv" Nullable="false" MaxLength="5" />
+    <Property Type="String" Name="tencv" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="hoten" Nullable="false" MaxLength="30" />
+    <Property Type="DateTime" Name="ngaysinh" Nullable="false" />
+    <Property Type="String" Name="gioitinh" Nullable="false" MaxLength="3" />
+    <Property Type="String" Name="sdt" Nullable="false" MaxLength="12" />
+    <Property Type="String" Name="cmnd" Nullable="false" MaxLength="9" />
+    <Property Type="String" Name="diachi" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="email" Nullable="true" MaxLength="30" />
+  </ComplexType>
+  <ComplexType Name="gethoadon_Result">
+    <Property Type="String" Name="mahd" Nullable="false" MaxLength="5" />
+    <Property Type="DateTime" Name="ngaylap" Nullable="false" />
+    <Property Type="String" Name="madp" Nullable="false" MaxLength="5" />
+    <Property Type="String" Name="makh" Nullable="false" MaxLength="5" />
+    <Property Type="String" Name="hoten" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="tenlp" Nullable="false" MaxLength="10" />
+    <Property Type="Int32" Name="soluong" Nullable="false" />
+    <Property Type="DateTime" Name="ngayden" Nullable="false" />
+    <Property Type="DateTime" Name="ngaydi" Nullable="false" />
+    <Property Type="Int32" Name="tongtien" Nullable="false" />
+  </ComplexType>
+</Schema>
